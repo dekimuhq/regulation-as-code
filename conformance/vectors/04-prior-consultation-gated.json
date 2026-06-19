@@ -1,0 +1,29 @@
+{
+  "name": "04-prior-consultation-gated",
+  "profile": "gdpr/v1",
+  "facts": { "processesPersonalData": true, "usesAiFeatures": true, "dpiaResidualRiskHigh": true },
+  "corpus": [
+    { "family": "ACR", "claimId": "acr-1", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true },
+    { "family": "APuR", "claimId": "apur-1", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true },
+    { "family": "ARR", "claimId": "arr-1", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true },
+    { "family": "ANR", "claimId": "anr-1", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true },
+    { "family": "ASR", "claimId": "asr-1", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true },
+    { "family": "FORGET", "claimId": "forget-1", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true },
+    { "family": "AIR", "claimId": "air-dpia", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true, "eventType": "dpia.completed" },
+    { "family": "AIR", "claimId": "air-priorconsult", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true, "eventType": "dpia.prior_consultation_resolved" }
+  ],
+  "now": "2026-06-19T00:00:00.000Z",
+  "expected": {
+    "coverageRatio": 1,
+    "results": [
+      { "obligationId": "gdpr.lawful-basis", "status": "satisfied" },
+      { "obligationId": "gdpr.purpose-limitation", "status": "satisfied" },
+      { "obligationId": "gdpr.retention", "status": "satisfied" },
+      { "obligationId": "gdpr.privacy-notice", "status": "satisfied" },
+      { "obligationId": "gdpr.subject-rights", "status": "satisfied" },
+      { "obligationId": "gdpr.erasure", "status": "satisfied" },
+      { "obligationId": "gdpr.dpia", "status": "satisfied" },
+      { "obligationId": "gdpr.prior-consultation", "status": "satisfied" }
+    ]
+  }
+}

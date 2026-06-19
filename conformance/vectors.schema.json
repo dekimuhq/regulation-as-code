@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["name", "profile", "facts", "corpus", "now", "expected"],
+  "properties": {
+    "name": { "type": "string" },
+    "profile": { "const": "gdpr/v1" },
+    "facts": { "type": "object" },
+    "corpus": { "type": "array", "items": {
+      "type": "object",
+      "required": ["family", "claimId", "issuedAt", "active"],
+      "properties": {
+        "family": { "type": "string" }, "claimId": { "type": "string" },
+        "issuedAt": { "type": "string" }, "active": { "type": "boolean" },
+        "eventType": { "type": "string" }
+      }
+    }},
+    "now": { "type": "string" },
+    "expected": { "type": "object", "required": ["coverageRatio", "results"],
+      "properties": {
+        "coverageRatio": { "type": "number" },
+        "results": { "type": "array", "items": {
+          "type": "object", "required": ["obligationId", "status"],
+          "properties": {
+            "obligationId": { "type": "string" },
+            "status": { "enum": ["satisfied","at-risk","expired","missing","not-applicable"] }
+          }
+        }}
+      }
+    }
+  }
+}

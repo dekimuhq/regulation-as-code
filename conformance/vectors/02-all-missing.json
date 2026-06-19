@@ -1,0 +1,20 @@
+{
+  "name": "02-all-missing",
+  "profile": "gdpr/v1",
+  "facts": { "processesPersonalData": true, "usesAiFeatures": false },
+  "corpus": [],
+  "now": "2026-06-19T00:00:00.000Z",
+  "expected": {
+    "coverageRatio": 0,
+    "results": [
+      { "obligationId": "gdpr.lawful-basis", "status": "missing" },
+      { "obligationId": "gdpr.purpose-limitation", "status": "missing" },
+      { "obligationId": "gdpr.retention", "status": "missing" },
+      { "obligationId": "gdpr.privacy-notice", "status": "missing" },
+      { "obligationId": "gdpr.subject-rights", "status": "missing" },
+      { "obligationId": "gdpr.erasure", "status": "missing" },
+      { "obligationId": "gdpr.dpia", "status": "not-applicable" },
+      { "obligationId": "gdpr.prior-consultation", "status": "not-applicable" }
+    ]
+  }
+}

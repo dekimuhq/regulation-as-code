@@ -1,0 +1,20 @@
+{
+  "name": "01-not-applicable",
+  "profile": "gdpr/v1",
+  "facts": { "processesPersonalData": false, "usesAiFeatures": false },
+  "corpus": [],
+  "now": "2026-06-19T00:00:00.000Z",
+  "expected": {
+    "coverageRatio": 1,
+    "results": [
+      { "obligationId": "gdpr.lawful-basis", "status": "not-applicable" },
+      { "obligationId": "gdpr.purpose-limitation", "status": "not-applicable" },
+      { "obligationId": "gdpr.retention", "status": "not-applicable" },
+      { "obligationId": "gdpr.privacy-notice", "status": "not-applicable" },
+      { "obligationId": "gdpr.subject-rights", "status": "not-applicable" },
+      { "obligationId": "gdpr.erasure", "status": "not-applicable" },
+      { "obligationId": "gdpr.dpia", "status": "not-applicable" },
+      { "obligationId": "gdpr.prior-consultation", "status": "not-applicable" }
+    ]
+  }
+}

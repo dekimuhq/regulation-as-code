@@ -1,0 +1,27 @@
+{
+  "name": "03-fresh-vs-expired",
+  "profile": "gdpr/v1",
+  "facts": { "processesPersonalData": true, "usesAiFeatures": false },
+  "corpus": [
+    { "family": "ACR", "claimId": "acr-1", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true },
+    { "family": "APuR", "claimId": "apur-1", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true },
+    { "family": "ARR", "claimId": "arr-old", "issuedAt": "2025-05-15T00:00:00.000Z", "active": true },
+    { "family": "ANR", "claimId": "anr-fresh", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true },
+    { "family": "ASR", "claimId": "asr-1", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true },
+    { "family": "FORGET", "claimId": "forget-1", "issuedAt": "2026-06-01T00:00:00.000Z", "active": true }
+  ],
+  "now": "2026-06-19T00:00:00.000Z",
+  "expected": {
+    "coverageRatio": 0.8333333333333334,
+    "results": [
+      { "obligationId": "gdpr.lawful-basis", "status": "satisfied" },
+      { "obligationId": "gdpr.purpose-limitation", "status": "satisfied" },
+      { "obligationId": "gdpr.retention", "status": "expired" },
+      { "obligationId": "gdpr.privacy-notice", "status": "satisfied" },
+      { "obligationId": "gdpr.subject-rights", "status": "satisfied" },
+      { "obligationId": "gdpr.erasure", "status": "satisfied" },
+      { "obligationId": "gdpr.dpia", "status": "not-applicable" },
+      { "obligationId": "gdpr.prior-consultation", "status": "not-applicable" }
+    ]
+  }
+}
