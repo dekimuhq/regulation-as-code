@@ -295,8 +295,8 @@ hashes for identical content:
 
 1. **Canonical serialization (RFC 8785 / JSON Canonicalization Scheme).** The IR
    is serialized to a single canonical JSON string with:
-   - every object's keys sorted **lexicographically** (by UTF-16 code unit, i.e.
-     the order produced by sorting the JSON-escaped key strings);
+   - every object's keys sorted **lexicographically** (by UTF-16 code unit of the
+     raw, unescaped key strings);
    - **no insignificant whitespace** (no spaces, no newlines between tokens);
    - standard JSON string escaping for strings and keys;
    - arrays serialized **positionally** in their existing order (arrays are
