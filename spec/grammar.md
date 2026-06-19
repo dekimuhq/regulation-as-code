@@ -183,7 +183,7 @@ type Requirement =
   with receipts that carry an event-type discriminator).
 
 `CountOp` is the closed set `gte | lte | eq`. Note it is a strict subset of
-`CompareOp`: a count requirement **MUST NOT** use `ne`, `lt`, `gt`, `lte`-vs-…
+`CompareOp`: a count requirement **MUST NOT** use `ne`, `lt`, `gt`, or `in`
 — only `gte`, `lte`, `eq` are valid count operators.
 
 ### 3.3 `dependsOn` placement (normative)

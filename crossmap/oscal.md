@@ -81,10 +81,11 @@ the authoritative legal text, and a freshness/grace model — is not the shape
 OSCAL's control-and-assessment models provide.
 
 **RaC fills the EU-obligation gap.** Its grammar encodes an EU regulation as a
-[`SourceManifest`](../spec/grammar.md#5-sourcemanifest) of obligations, each with
-a `citationUrl` to the legal source (see the
-[GDPR v1 reference profile](../profiles/gdpr/v1.md)), and reconciles it into a
-reproducible signed receipt. This is **complementary**, not competitive: where a
+[`SourceManifest`](../spec/grammar.md#5-sourcemanifest) of obligations, each
+carrying executable applicability, a satisfaction predicate over evidence,
+remediation, and — where a stable legal citation exists — a `citationUrl` to the
+legal source (see the [GDPR v1 reference profile](../profiles/gdpr/v1.md)), and
+reconciles it into a reproducible signed receipt. This is **complementary**, not competitive: where a
 consumer's pipeline expects OSCAL, RaC can **export toward OSCAL
 assessment-results** — projecting an [`ObligationReport`](../spec/evaluation.md#71-obligationreport)
 into OSCAL findings so a RaC evaluation can ride alongside an existing OSCAL

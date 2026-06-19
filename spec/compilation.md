@@ -293,7 +293,7 @@ rendered as lowercase hexadecimal. This is the content-addressed version pin.
 The contract is exact so that two independent implementations compute identical
 hashes for identical content:
 
-1. **Canonical serialization (RFC 8785 / JSON Canonicalization Scheme).** The IR
+1. **Canonical serialization (JCS-style, RFC 8785-derived).** The IR
    is serialized to a single canonical JSON string with:
    - every object's keys sorted **lexicographically** (by UTF-16 code unit of the
      raw, unescaped key strings);
@@ -301,14 +301,24 @@ hashes for identical content:
    - standard JSON string escaping for strings and keys;
    - arrays serialized **positionally** in their existing order (arrays are
      never reordered);
-   - object members whose value is `undefined` **omitted** (an `undefined`
-     value is not a JSON value and contributes nothing);
+   - object members whose value is `undefined` **omitted**, applied
+     **recursively** — including members of obligation objects nested inside the
+     `obligations` array (e.g. an obligation with no `citationUrl` omits the key
+     entirely; an implementation that instead emits `"citationUrl": null`
+     produces a divergent hash);
    - `null`, finite `number`, `boolean`, and `string` rendered as their JSON
      forms.
    - Serialization **MUST** reject non-finite numbers, functions, and other
      non-JSON values rather than emitting a degenerate form; the IR's value
      space (objects, arrays, strings, finite numbers, booleans, null) is closed
      and contains none of these.
+   - **Number rendering note.** The reference pipeline renders numbers via the
+     platform's standard JSON number formatting, not the full RFC 8785 / ECMAScript
+     number-canonicalization rule. The IR's only numeric fields
+     (`atRiskWindowDays`, `maxAgeDays`, `n`) are small non-negative integers, for
+     which the two coincide; this spec therefore constrains the IR's numbers to
+     **integers** so the digest is unambiguous. A strict RFC 8785 number
+     formatter is permitted and produces the same bytes over this value space.
 2. **UTF-8 encoding.** The canonical JSON string **MUST** be encoded to bytes as
    **UTF-8** (no BOM) before hashing.
 3. **Digest.** Compute `sha256` over those UTF-8 bytes.

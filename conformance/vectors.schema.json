@@ -1,31 +1,70 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RaC conformance vector (gdpr/v1)",
   "type": "object",
+  "additionalProperties": false,
   "required": ["name", "profile", "facts", "corpus", "now", "expected"],
   "properties": {
-    "name": { "type": "string" },
+    "name": { "type": "string", "minLength": 1 },
     "profile": { "const": "gdpr/v1" },
-    "facts": { "type": "object" },
-    "corpus": { "type": "array", "items": {
+    "facts": {
       "type": "object",
-      "required": ["family", "claimId", "issuedAt", "active"],
+      "additionalProperties": false,
+      "required": ["processesPersonalData", "usesAiFeatures"],
       "properties": {
-        "family": { "type": "string" }, "claimId": { "type": "string" },
-        "issuedAt": { "type": "string" }, "active": { "type": "boolean" },
-        "eventType": { "type": "string" }
+        "processesPersonalData": { "type": "boolean" },
+        "usesAiFeatures": { "type": "boolean" },
+        "dpiaResidualRiskHigh": { "type": "boolean" }
       }
-    }},
-    "now": { "type": "string" },
-    "expected": { "type": "object", "required": ["coverageRatio", "results"],
+    },
+    "corpus": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["family", "claimId", "issuedAt", "active"],
+        "properties": {
+          "family": { "type": "string", "minLength": 1 },
+          "claimId": { "type": "string", "minLength": 1 },
+          "issuedAt": { "type": "string", "format": "date-time" },
+          "active": { "type": "boolean" },
+          "eventType": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "now": { "type": "string", "format": "date-time" },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["coverageRatio", "results"],
       "properties": {
-        "coverageRatio": { "type": "number" },
-        "results": { "type": "array", "items": {
-          "type": "object", "required": ["obligationId", "status"],
-          "properties": {
-            "obligationId": { "type": "string" },
-            "status": { "enum": ["satisfied","at-risk","expired","missing","not-applicable"] }
+        "coverageRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+        "results": {
+          "type": "array",
+          "minItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["obligationId", "status"],
+            "properties": {
+              "obligationId": {
+                "enum": [
+                  "gdpr.lawful-basis",
+                  "gdpr.purpose-limitation",
+                  "gdpr.retention",
+                  "gdpr.privacy-notice",
+                  "gdpr.subject-rights",
+                  "gdpr.erasure",
+                  "gdpr.dpia",
+                  "gdpr.prior-consultation"
+                ]
+              },
+              "status": {
+                "enum": ["satisfied", "at-risk", "expired", "missing", "not-applicable"]
+              }
+            }
           }
-        }}
+        }
       }
     }
   }

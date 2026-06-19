@@ -46,7 +46,9 @@ An implementation reconciling the `gdpr/v1` profile:
 
 - **MUST** return `satisfied` for an `exists` obligation when an active receipt
   of the bound family is present (`ACR`→lawful-basis, `APuR`→purpose-limitation,
-  `ASR`→subject-rights, `FORGET`→erasure, `AIR`→dpia). *(Vectors 03, 04.)*
+  `ASR`→subject-rights, `FORGET`→erasure, `AIR`→dpia). *(Vector 04 — in vector
+  03 `usesAiFeatures` is false, so the `AIR`-bound dpia obligation is
+  `not-applicable`, not `satisfied`.)*
 
 - **MUST** apply the `fresh` boundaries with the manifest's `maxAgeDays` (365 for
   `ARR`/`ANR`) and manifest-level `atRiskWindowDays` (30): an active receipt aged

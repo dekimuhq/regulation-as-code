@@ -23,7 +23,7 @@ A regulation profile (e.g. AI-Act, DORA) is a `SourceManifest` plus its citation
 1. Add `profiles/<regulation>/v1.md` following the structure of `profiles/gdpr/v1.md`.
 2. Bind requirements to evidence families documented in `spec/evidence.md` (or add a new family binding there).
 3. Include at least one conformance vector under `conformance/vectors/` exercising the profile.
-4. Cite the authoritative legal source (e.g. EUR-Lex) for every obligation.
+4. Cite the authoritative legal source (e.g. EUR-Lex) via `citationUrl` for each obligation where a stable citation exists (`citationUrl` is a SHOULD, not a MUST — see `spec/grammar.md` §4).
 
 ## Pull requests
 

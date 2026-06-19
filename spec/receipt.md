@@ -20,11 +20,12 @@ are to be interpreted as described in RFC 2119 / RFC 8174.
 
 Notation in this file is TypeScript-ish, matching the shipped type definitions.
 All record fields are immutable (`readonly`); the modifier is elided in examples
-for brevity. The canonicalization and hashing contract — RFC 8785 (JSON
-Canonicalization Scheme) serialization followed by `sha256` in lowercase hex —
-is the **same contract** defined in `compilation.md` §5; this file reuses it
-verbatim and does not redefine it. Throughout, `canonicalize(x)` denotes the RFC
-8785 JCS serialization of `x` to UTF-8 bytes, and `hashCanonical(x)` denotes
+for brevity. The canonicalization and hashing contract — JCS-style
+(RFC 8785-derived) serialization followed by `sha256` in lowercase hex —
+is the **same contract** defined in `compilation.md` §5 (including its number-
+rendering note); this file reuses it verbatim and does not redefine it.
+Throughout, `canonicalize(x)` denotes that serialization of `x` to UTF-8 bytes,
+and `hashCanonical(x)` denotes
 `lowerhex(sha256(utf8(canonicalize(x))))`. The reference implementation factors
 both identically to `compilation.md`.
 
@@ -144,14 +145,27 @@ corpusDigest = hashCanonical( sortByClaimId( corpus.map(project4) ) )
 Sorting by `claimId` makes the digest invariant to the order in which the corpus
 was assembled.
 
-> **Reproducibility caveat (informative).** `corpusDigest` is order-independent,
-> but the engine's tie-breaking on receipts with **equal `issuedAt`** is
-> array-order sensitive (`evaluation.md`). Two corpora with the same
-> `corpusDigest` but different array order can therefore reconcile to different
-> reports if a tie exists. A producer that wants a re-run to reproduce the same
-> report **SHOULD** pass a deterministically-ordered corpus to the engine. The
-> digest pins *which receipts* were present; deterministic input order pins
-> *which one wins a tie*.
+> **Reproducibility caveat (informative).** `corpusDigest` is a *coarse* index of
+> the corpus, not a complete binding of every evaluation-affecting input. Two
+> distinct caveats follow, and a verifier MUST understand both:
+>
+> 1. **Dropped fields.** The projection omits `eventType` (and any
+>    adapter-specific extras). Because `eventType` participates in matching
+>    (`evaluation.md` §5.6 — e.g. `gdpr.prior-consultation`), two corpora that
+>    differ **only** in `eventType` share a `corpusDigest` yet reconcile to
+>    **different reports**.
+> 2. **Tie order.** The engine's tie-breaking on receipts with equal `issuedAt`
+>    is array-order sensitive (`evaluation.md`); two corpora with the same digest
+>    but different array order can reconcile differently when a tie exists.
+>
+> The authoritative binding of evaluation-affecting data is therefore **not**
+> `corpusDigest` — it is `reportHash`, recomputed by the §5 re-run. `corpusDigest`
+> pins *which receipts (by id/family/time/active)* were present; the signed
+> `reportHash` is what makes the *outcome* tamper-evident. Consequently a corpus
+> that has been altered in a digest-invisible way (changed `eventType`, reordered
+> ties) is still **caught**: the re-run produces a different `reportHash` and
+> `reproducible` becomes `false`. A producer that wants a clean re-run **SHOULD**
+> pass a deterministically-ordered corpus with stable `eventType`s.
 
 ### 2.5 `engineVersion`
 

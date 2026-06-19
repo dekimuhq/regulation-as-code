@@ -52,18 +52,18 @@ const manifest: SourceManifest = {
   ],
   obligations: [
     {
-      id: "ropa-required",
-      regulation: "GDPR Art. 30",
+      id: "lawful-basis",
+      regulation: "GDPR Art. 6",
       appliesWhen: { kind: "fact", fact: "processes_personal_data" },
-      requires: { kind: "exists", family: "AIR" },
-      remediation: "Record a Record-of-Processing-Activities receipt.",
+      requires: { kind: "exists", family: "ACR" },
+      remediation: "Record a consent / lawful-basis receipt (ACR).",
     },
   ],
 };
 ```
 
 When the workspace fact `processes_personal_data` is `true` and the corpus holds
-an active receipt in family `AIR`, the obligation evaluates to **`satisfied`**;
+an active receipt in family `ACR`, the obligation evaluates to **`satisfied`**;
 with the same fact true but no such receipt, it is **`missing`**. When the fact
 is `false`, `appliesWhen` is false and the obligation is **`not-applicable`** —
 excluded from the honest coverage denominator.
