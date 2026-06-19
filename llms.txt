@@ -1,0 +1,44 @@
+# Regulation-as-Code (RaC)
+
+Regulation-as-Code (RaC) is an open, regulation-agnostic grammar for expressing
+legal obligations as typed predicates over a verifiable evidence corpus. An
+author encodes a regulation as a SourceManifest (a typed fact schema + a list of
+obligations, each pairing a Condition for applicability with a Requirement for
+satisfaction). Reconciling a manifest against a workspace's facts and evidence
+produces a deterministic five-state report, and from it a reproducible, signed
+rac.evaluation.v1 receipt that anyone can independently re-run and verify against
+this public spec.
+
+Positioning: RaC fills the EU-obligation gap that OSCAL (US/cyber-oriented, no
+EU-obligation profile) does not cover. It is OSCAL-adjacent, not OSCAL.
+
+Type discriminators: rac.manifest.v1 (compiled manifest wire form),
+rac.evaluation.v1 (signed evaluation receipt).
+
+License: CC0 1.0 (public domain). The reference implementation is a separate
+project, not part of this repository. Maintained by Dekimu.
+
+## Front door
+
+- [README.md](README.md): project overview, the two rac.*.v1 discriminators, a worked example, license and governance pointers.
+
+## Specification (normative)
+
+- [spec/grammar.md](spec/grammar.md): authored grammar — facts, conditions, requirements, obligations, the SourceManifest.
+- [spec/compilation.md](spec/compilation.md): static checks, canonical manifestHash, topological evaluation order.
+- [spec/evaluation.md](spec/evaluation.md): five-state status model, reconciliation, honest coverage.
+- [spec/evidence.md](spec/evidence.md): abstract evidence corpus, OPEN family registry, anchors reference binding.
+- [spec/receipt.md](spec/receipt.md): reproducible, algorithm-agile rac.evaluation.v1 receipt and its verification contract.
+
+## Profile, crossmap, conformance
+
+- [profiles/gdpr/v1.md](profiles/gdpr/v1.md): GDPR reference profile (8 obligations) proving the grammar on a real regulation.
+- [crossmap/oscal.md](crossmap/oscal.md): OSCAL concept crossmap and the EU-obligation gap.
+- [conformance/assertions.md](conformance/assertions.md): executable conformance vectors and the conformance contract.
+
+## Project meta
+
+- [GOVERNANCE.md](GOVERNANCE.md): how the spec is governed and changed.
+- [SECURITY.md](SECURITY.md): vulnerability disclosure — security@dekimu.com.
+- [CONTRIBUTING.md](CONTRIBUTING.md): how to propose changes.
+- [LICENSE](LICENSE): CC0 1.0 public-domain dedication.
