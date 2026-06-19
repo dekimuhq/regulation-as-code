@@ -143,26 +143,28 @@ carry and a requirement may reference.
 
 ### 3.1 The 14 anchors families
 
-| Family   | One-line meaning (reference binding) |
-|----------|--------------------------------------|
-| `APR`    | Action / Processing Receipt — a recorded action or processing event. |
-| `ACR`    | Consent Receipt — a recorded grant of consent. |
-| `ARR`    | Rights / Request Receipt — a data-subject right exercised and recorded. |
-| `ALR`    | Lineage Receipt — a recorded data-flow / lineage step. |
-| `ATR`    | Transfer Receipt — a recorded (cross-border) data transfer. |
-| `APuR`   | Purpose Receipt — a recorded processing purpose. |
-| `AER`    | Erasure Receipt — a recorded erasure handled through the receipt pipeline. |
-| `AAR`    | Access Receipt — a recorded access to or disclosure of data. |
-| `ADR`    | Decision Receipt — a recorded (automated) decision. |
-| `ANR`    | Notification Receipt — a recorded notification (e.g. breach / data-subject). |
-| `ASR`    | Subject-request Receipt — a recorded handling of a subject request. |
-| `ABR`    | Breach Receipt — a recorded breach event. |
-| `AIR`    | Impact / Assessment Receipt — a recorded impact assessment such as a DPIA. |
-| `ATokR`  | Token / Tokenization Receipt — a recorded tokenization event. |
+| Family   | Wire format         | One-line meaning (reference binding) |
+|----------|---------------------|--------------------------------------|
+| `APR`    | `ar.provenance.v1`  | Agent Provenance Receipt — a recorded agent action / data-processing provenance event. |
+| `ACR`    | `ar.consent.v1`     | Anchored Consent Receipt — a recorded, informed grant of consent. |
+| `ARR`    | `ar.retention.v1`   | Anchored Retention Receipt — a recorded data-retention schedule / retention-enforcement run. |
+| `ALR`    | `ar.lineage.v1`     | Anchored Lineage Receipt — a recorded data-flow / lineage step. |
+| `ATR`    | `ar.transfer.v1`    | Anchored Transfer Receipt — a recorded cross-border data transfer (GDPR Ch. V / Schrems II). |
+| `APuR`   | `ar.purpose.v1`     | Anchored Purpose Receipt — a recorded processing purpose. |
+| `AER`    | `ar.evaluation.v1`  | Anchored Evaluation Receipt — a recorded conformity / automated-decision evaluation. |
+| `AAR`    | `ar.attestation.v1` | Anchored Attestation Receipt — a recorded attestation of a fact or state. |
+| `ADR`    | `ar.delegation.v1`  | Anchored Delegation Receipt — a recorded delegation of authority. |
+| `ANR`    | `ar.notice.v1`      | Anchored Notice Receipt — a recorded privacy notice / information provided to data subjects (GDPR Arts. 13–14). |
+| `ASR`    | `ar.subject_rights.v1` | Anchored Subject-Rights Receipt — a recorded handling of a data-subject rights request (GDPR Arts. 15–22). |
+| `ABR`    | `ar.breach.v1`      | Anchored Breach Receipt — a recorded breach detection / assessment / notification lifecycle. |
+| `AIR`    | `ar.impact.v1`      | Anchored Impact Receipt — a recorded impact assessment such as a DPIA (GDPR Arts. 35–36). |
+| `ATokR`  | `ar.tokenization.v1`| Anchored Tokenization Receipt — a recorded PII-tokenization lifecycle event. |
 
 These map one-to-one to the locked `AnchorsFamily` union in the reference
-implementation. The exact wire formats are an anchors concern and are **out of
-scope** for this spec; RaC sees only the projected `CorpusReceipt`.
+implementation. The acronyms (`APR`, `ACR`, …) are documentation shorthand; the
+canonical wire identifier is the `ar.<noun>.v<N>` form. The exact wire formats
+are an anchors concern and are **out of scope** for this spec; RaC sees only the
+projected `CorpusReceipt`.
 
 ### 3.2 `FORGET` — non-anchors evidence source
 
