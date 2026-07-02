@@ -12,7 +12,7 @@ This document defines how the **Regulation-as-Code (RaC)** specification is main
 
 ## Steward
 
-The specification is maintained by a **Steward**. The current Steward is **Dekimu Labs**.
+The specification is maintained by a **Steward**. The current Steward is **Dekimu**.
 
 The Steward:
 
