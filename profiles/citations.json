@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "doc": "gdpr-v1",
+      "pool": "PROFILE",
+      "key": null,
+      "clauseId": "gdpr.lawful-basis",
+      "authority": "GDPR",
+      "citation": "GDPR Art. 6 — lawfulness of processing",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e1888-1-1",
+      "retrievedAt": "2026-06-19",
+      "materiality": "Predicate gdpr.lawful-basis of the gdpr/v1 profile transcription derives from this source."
+    },
+    {
+      "doc": "gdpr-v1",
+      "pool": "PROFILE",
+      "key": null,
+      "clauseId": "gdpr.erasure",
+      "authority": "GDPR",
+      "citation": "GDPR Art. 17 — right to erasure",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e2606-1-1",
+      "retrievedAt": "2026-06-19",
+      "materiality": "Predicate gdpr.erasure of the gdpr/v1 profile transcription derives from this source."
+    },
+    {
+      "doc": "gdpr-v1",
+      "pool": "PROFILE",
+      "key": null,
+      "clauseId": "gdpr.prior-consultation",
+      "authority": "GDPR",
+      "citation": "GDPR Art. 36 — prior consultation",
+      "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e3138-1-1",
+      "retrievedAt": "2026-06-19",
+      "materiality": "Predicate gdpr.prior-consultation of the gdpr/v1 profile transcription derives from this source."
+    }
+  ]
+}
