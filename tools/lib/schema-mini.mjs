@@ -32,13 +32,26 @@ const typeName = (v) => (v === null ? "null" : Array.isArray(v) ? "array" : type
 // date maths, so a malformed timestamp is a real defect, not a style nit.
 const DATE_TIME = /^\d{4}-\d{2}-\d{2}[Tt]\d{2}:\d{2}:\d{2}(\.\d+)?([Zz]|[+-]\d{2}:\d{2})$/;
 
-/** Throws on any keyword this validator does not implement. Call before validate(). */
+/** Throws on any keyword — or keyword FORM — this validator does not implement.
+ *  Call before validate(). The guard must be TOTAL over what validate() actually
+ *  checks: a supported keyword name with an unimplemented shape (subschema-valued
+ *  `additionalProperties`, tuple-form `items`, a `format` other than "date-time")
+ *  would otherwise silently validate less. */
 export function assertSupported(schema, path = "#") {
   if (schema === null || typeof schema !== "object") return;
   for (const k of Object.keys(schema)) {
     if (!SUPPORTED.has(k)) {
       throw new Error(`schema-mini: unsupported keyword "${k}" at ${path} — this validator implements a scoped subset of draft 2020-12. Implement the keyword in tools/lib/schema-mini.mjs (and cover it in the smoke), or move the repo to a full validator.`);
     }
+  }
+  if ("additionalProperties" in schema && typeof schema.additionalProperties !== "boolean") {
+    throw new Error(`schema-mini: subschema-valued "additionalProperties" at ${path} is not implemented — only the boolean form is. validate() would silently ignore it.`);
+  }
+  if ("format" in schema && schema.format !== "date-time") {
+    throw new Error(`schema-mini: unsupported format "${schema.format}" at ${path} — only "date-time" is implemented. validate() would silently ignore it.`);
+  }
+  if (Array.isArray(schema.items)) {
+    throw new Error(`schema-mini: tuple-form "items" at ${path} is not implemented — only a single subschema is.`);
   }
   for (const [k, v] of Object.entries(schema.properties ?? {})) assertSupported(v, `${path}/properties/${k}`);
   if (schema.items) assertSupported(schema.items, `${path}/items`);

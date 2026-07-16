@@ -24,6 +24,15 @@ assert.doesNotThrow(() => assertSupported(realSchema));
 assert.throws(() => assertSupported({ type: "object", properties: { a: { pattern: "^x$" } } }), /unsupported keyword "pattern"/);
 assert.throws(() => assertSupported({ oneOf: [] }), /unsupported keyword "oneOf"/);
 assert.throws(() => assertSupported({ $ref: "#/x" }), /unsupported keyword "\$ref"/);
+// (b2) the guard is TOTAL over keyword FORMS validate() does not implement:
+// subschema-valued additionalProperties (validate only handles the boolean form)
+assert.throws(() => assertSupported({ type: "object", additionalProperties: { type: "string" } }), /subschema-valued "additionalProperties"/);
+// a format other than date-time (validate would silently ignore it)
+assert.throws(() => assertSupported({ type: "string", format: "email" }), /unsupported format "email"/);
+// tuple-form items (validate only handles a single subschema)
+assert.throws(() => assertSupported({ type: "array", items: [{ type: "string" }] }), /tuple-form "items"/);
+// and it reaches keywords nested under items-of-items
+assert.throws(() => assertSupported({ type: "array", items: { type: "array", items: { type: "object", properties: { z: { $ref: "#/z" } } } } }), /unsupported keyword "\$ref" at #\/items\/items\/properties\/z/);
 
 // (c) per-keyword rejection
 const ok = { name: "n", profile: "gdpr/v1", now: "2026-06-19T00:00:00.000Z", ratio: 1, results: Array.from({ length: 8 }, () => ({ status: "satisfied" })) };

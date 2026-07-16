@@ -84,4 +84,9 @@ const errs = checkLinks({ files, exists });
 assert.equal(errs.length, 2, `expected exactly 2, got ${JSON.stringify(errs)}`);
 assert.ok(errs.some((e) => /dead relative link → \.\.\/nope\.md/.test(e)));
 assert.ok(errs.some((e) => /#ghost/.test(e) && /heading that does not exist/.test(e)));
+// link EXAMPLES in fenced blocks and inline code spans are not live links
+assert.deepEqual(checkLinks({
+  files: new Map([["doc.md", "```md\n[fenced example](fenced-ghost.md)\n```\n\nUse `[inline example](inline-ghost.md)` in your doc.\n\n[real-dead](real-ghost.md)\n"]]),
+  exists: (p) => p === "doc.md",
+}).map((e) => e.replace(/^doc\.md: /, "")), ["dead relative link → real-ghost.md"]);
 console.log("checks smoke OK");

@@ -129,11 +129,27 @@ export function headingSlugs(md) {
   return out;
 }
 
+/** Code-free view of a markdown doc: fenced blocks and inline `code` spans are
+ *  blanked so a documented link EXAMPLE (`[x](nope.md)`) is never treated as a
+ *  live link. Same fence rule as headingSlugs. */
+function stripCode(md) {
+  const out = [];
+  let fenced = false;
+  for (const line of md.split("\n")) {
+    if (/^\s*```/.test(line)) { fenced = !fenced; out.push(""); continue; }
+    out.push(fenced ? "" : line.replace(/`[^`]*`/g, ""));
+  }
+  return out.join("\n");
+}
+
 /** Relative + anchor link integrity.
  *  @param files  Map<repoRelPosixPath, content> — markdown-ish docs only.
  *  @param exists (repoRelPosixPath) => boolean — ANY repo path (dirs + LICENSE too).
- *  External http(s)/mailto targets are out of scope: the monorepo's link-audit
- *  already reaches those (and the citation sentinel owns the regulator URLs). */
+ *  External http(s)/mailto targets are out of scope FOR THIS CHECKER — and mostly
+ *  unchecked elsewhere too: the monorepo's daily citation sentinel watches this
+ *  repo's REGULATOR citation URLs (its own dedicated clone), but RaC is
+ *  deliberately excluded from the monorepo's weekly STANDALONE_REPOS link sweep,
+ *  so general external URLs here have no automated reachability check. */
 export function checkLinks({ files, exists }) {
   const errs = [];
   const slugCache = new Map();
@@ -142,7 +158,7 @@ export function checkLinks({ files, exists }) {
     return slugCache.get(p);
   };
   for (const [file, text] of files) {
-    for (const m of text.matchAll(/\[[^\]]*\]\(([^)\s]+)\)/g)) {
+    for (const m of stripCode(text).matchAll(/\[[^\]]*\]\(([^)\s]+)\)/g)) {
       const target = m[1];
       if (/^(https?:|mailto:)/i.test(target)) continue;
       const hash = target.indexOf("#");

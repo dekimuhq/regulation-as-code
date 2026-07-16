@@ -22,7 +22,10 @@ smokes first (`tools/lib/*.smoke.mjs`), then the validator.
    matching registry row. `citationUrl` is a SHOULD, not a MUST — obligations
    without one are never flagged.
 3. **Links** — every relative link and `#anchor` across the repo's markdown
-   resolves. External URLs are out of scope (audited elsewhere).
+   resolves (link examples inside code blocks are ignored). External URLs are
+   out of scope for this checker: the regulator *citation* URLs are watched
+   daily by an external sentinel, but other external URLs in this repo have no
+   automated reachability check.
 
 ## The oracle boundary
 
