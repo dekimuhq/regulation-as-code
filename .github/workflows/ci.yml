@@ -1,0 +1,39 @@
+name: ci
+
+# Structural validation for the RaC spec repo. There is nothing to build or
+# typecheck — this repo is markdown + JSON (see tools/README.md). Semantic
+# conformance (does a vector's `status` match the engine?) is out of scope here:
+# the normative oracle is private, per conformance/assertions.md.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Structural validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set up Node
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: "20"
+
+      # The checks are pure functions; the smokes are their only test surface.
+      # They run FIRST — a broken checker must not masquerade as a green repo.
+      - name: Smoke gate (validator + checks)
+        run: |
+          node tools/lib/schema-mini.smoke.mjs
+          node tools/lib/checks.smoke.mjs
+
+      - name: Validate vectors, citations and links
+        run: node tools/validate.mjs
