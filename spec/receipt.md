@@ -37,6 +37,13 @@ both identically to `compilation.md`.
 > signed object, and the algorithm match the implementation exactly. A verifier
 > targeting this spec MUST treat `rac.evaluation.v1` as the discriminator and
 > SHOULD accept `compass.evaluation.v1` as its reference-implementation alias.
+>
+> **Do not confuse this with the anchors family `ar.evaluation.v1` (AER).** They
+> are distinct receipt types: an RaC evaluation receipt records **obligation
+> satisfaction over an evidence corpus** (many predicates, one compliance
+> verdict), whereas AER records a **single conformity / automated-decision
+> event**. Same English word, different structure and purpose; they do not
+> interoperate.
 
 ---
 
