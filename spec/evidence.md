@@ -147,7 +147,7 @@ carry and a requirement may reference.
 |----------|---------------------|--------------------------------------|
 | `APR`    | `ar.provenance.v1`  | Agent Provenance Receipt — a recorded agent action / data-processing provenance event. |
 | `ACR`    | `ar.consent.v1`     | Anchored Consent Receipt — a recorded, informed grant of consent. |
-| `ARR`    | `ar.retention.v1`   | Anchored Retention Receipt — a recorded data-retention schedule / retention-enforcement run. |
+| `ARR`    | `ar.erasure.v1`     | Anchored Retention Receipt — a recorded data-retention schedule / retention-enforcement run. (The retention family's canonical discriminator is `ar.erasure.v1`; it spans the erasure/expiry/hold/anonymization/archive/batch claim types.) |
 | `ALR`    | `ar.lineage.v1`     | Anchored Lineage Receipt — a recorded data-flow / lineage step. |
 | `ATR`    | `ar.transfer.v1`    | Anchored Transfer Receipt — a recorded cross-border data transfer (GDPR Ch. V / Schrems II). |
 | `APuR`   | `ar.purpose.v1`     | Anchored Purpose Receipt — a recorded processing purpose. |
@@ -160,8 +160,10 @@ carry and a requirement may reference.
 | `AIR`    | `ar.impact.v1`      | Anchored Impact Receipt — a recorded impact assessment such as a DPIA (GDPR Arts. 35–36). |
 | `ATokR`  | `ar.tokenization.v1`| Anchored Tokenization Receipt — a recorded PII-tokenization lifecycle event. |
 
-These map one-to-one to the locked `AnchorsFamily` union in the reference
-implementation. The acronyms (`APR`, `ACR`, …) are documentation shorthand; the
+These 14 are the GDPR-core subset of the anchors family registry that RaC's
+reference binding pins; the registry itself has grown beyond them, so this is a
+**subset** mapping, not a one-to-one of the full `AnchorsFamily` union. The
+acronyms (`APR`, `ACR`, …) are documentation shorthand; the
 canonical wire identifier is the `ar.<noun>.v<N>` form. The exact wire formats
 are an anchors concern and are **out of scope** for this spec; RaC sees only the
 projected `CorpusReceipt`.
