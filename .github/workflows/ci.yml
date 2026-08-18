@@ -26,7 +26,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
-          node-version: "20"
+          node-version: "22"
 
       # The checks are pure functions; the smokes are their only test surface.
       # They run FIRST — a broken checker must not masquerade as a green repo.
