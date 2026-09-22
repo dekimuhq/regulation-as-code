@@ -1,21 +1,25 @@
 {
   "version": 1,
-  "refreshed": {},
+  "refreshed": {
+    "https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e1888-1-1": "2026-09-22",
+    "https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e2606-1-1": "2026-09-22",
+    "https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e3138-1-1": "2026-09-22"
+  },
   "baselines": {
     "https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e1888-1-1": {
       "sha256": "sha256:1e167c810f6c552262b89360241c240eb25c9dc375488fada493f4acf18470fd",
       "algo": "text-v1+cellar",
-      "confirmedAt": "2026-09-21"
+      "confirmedAt": "2026-09-22"
     },
     "https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e2606-1-1": {
       "sha256": "sha256:1e167c810f6c552262b89360241c240eb25c9dc375488fada493f4acf18470fd",
       "algo": "text-v1+cellar",
-      "confirmedAt": "2026-09-21"
+      "confirmedAt": "2026-09-22"
     },
     "https://eur-lex.europa.eu/eli/reg/2016/679/oj#d1e3138-1-1": {
       "sha256": "sha256:1e167c810f6c552262b89360241c240eb25c9dc375488fada493f4acf18470fd",
       "algo": "text-v1+cellar",
-      "confirmedAt": "2026-09-21"
+      "confirmedAt": "2026-09-22"
     }
   }
 }
