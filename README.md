@@ -74,4 +74,6 @@ excluded from the honest coverage denominator.
 - **Governance:** see [GOVERNANCE.md](GOVERNANCE.md).
 - **Security / vulnerability disclosure:** `security@dekimu.com` (see [SECURITY.md](SECURITY.md)).
 
-Maintained by Dekimu.
+## Part of the Dekimu ecosystem
+
+Built and maintained by [Dekimu](https://dekimu.com). The Dekimu ecosystem — [Dekimu Hub](https://app.dekimu.com) and the public verifier at [verify.dekimu.com](https://verify.dekimu.com) — is the reference implementation for this project. Sibling projects: [anchors-spec](https://github.com/dekimuhq/anchors-spec) · [dekimu-mcp](https://github.com/dekimuhq/dekimu-mcp) · [agents.txt](https://github.com/dekimuhq/agents-txt) · [claude-memory](https://github.com/dekimuhq/claude-memory). All of them: https://dekimu.com/open-source.
