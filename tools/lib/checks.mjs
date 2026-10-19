@@ -45,11 +45,11 @@ export function obligationCitations(profileMd) {
 }
 
 /** Binds profiles/citations.json rows to the profile's obligations.
- *  BOUNDARY vs the monorepo: scripts/link-audit/lib/citation-surfaces.mjs:44-85
+ *  BOUNDARY vs the reference implementation: scripts/link-audit/lib/citation-surfaces.mjs:44-85
  *  compares URL *sets* (source citationUrls ↔ registry urls) across repos and
  *  ignores clauseId entirely — its own smoke fabricates `clauseId: c${i}`.
  *  Set parity is necessary but NOT sufficient: swap two rows' clauseIds and the
- *  URL set is unchanged, so the monorepo passes while the registry is wrong.
+ *  URL set is unchanged, so the reference implementation passes while the registry is wrong.
  *  This check binds id→url, which nothing else does. */
 export function checkCitationParity(profileMd, citations, { doc = "gdpr-v1" } = {}) {
   const errs = [];
@@ -146,9 +146,9 @@ function stripCode(md) {
  *  @param files  Map<repoRelPosixPath, content> — markdown-ish docs only.
  *  @param exists (repoRelPosixPath) => boolean — ANY repo path (dirs + LICENSE too).
  *  External http(s)/mailto targets are out of scope FOR THIS CHECKER — and mostly
- *  unchecked elsewhere too: the monorepo's daily citation sentinel watches this
+ *  unchecked elsewhere too: the reference implementation's daily citation sentinel watches this
  *  repo's REGULATOR citation URLs (its own dedicated clone), but RaC is
- *  deliberately excluded from the monorepo's weekly STANDALONE_REPOS link sweep,
+ *  deliberately excluded from the reference implementation's weekly link sweep,
  *  so general external URLs here have no automated reachability check. */
 export function checkLinks({ files, exists }) {
   const errs = [];
